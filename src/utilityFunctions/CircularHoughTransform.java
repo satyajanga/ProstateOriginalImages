@@ -1,3 +1,4 @@
+package utilityFunctions;
 import java.awt.Point;
 import java.util.Vector;
 
@@ -55,7 +56,7 @@ public class CircularHoughTransform {
 		}
 	}
 
-	private void fillHoughBins(Point point)
+	public void fillHoughBins(Point point)
 	{
 		double x,y;
 		int xindex,yindex;
@@ -70,6 +71,8 @@ public class CircularHoughTransform {
 					xindex = (int) ((x- centerXRange[0])/centerXBinSize);
 					yindex = (int) ((y-centerYRange[0])/centerYBinSize);
 					houghBins[i][xindex][yindex]+= 1;
+				//	System.out.println(i +" "+xindex+" "+yindex);
+					
 				}
 			}
 		}
@@ -89,7 +92,7 @@ public class CircularHoughTransform {
 			{
 				for(int k=0;k<numberOfCenterYBins;k++)
 				{
-					if(houghBins[i][j][k] < maxCount)
+					if(houghBins[i][j][k] > maxCount)
 					{
 						maxCount = houghBins[i][j][k];
 						maxRIndex = i;
@@ -101,13 +104,13 @@ public class CircularHoughTransform {
 		}
 
 		double[] maxParams = new double[3];
-		maxParams[0] = radiusRange[0] + maxRIndex*radiusBinSize;
-		maxParams[1] = centerXRange[0] + maxCenterXIndex*centerXBinSize;
-		maxParams[2] = centerYRange[0] + maxCenterYIndex*centerYBinSize;
+		maxParams[2] = radiusRange[0] + maxRIndex*radiusBinSize;
+		maxParams[0] = centerXRange[0] + maxCenterXIndex*centerXBinSize;
+		maxParams[1] = centerYRange[0] + maxCenterYIndex*centerYBinSize;
 		return maxParams;
 	}
 
-	
+
 	private void buildLookUpTable()
 	{
 		double r,theta;
@@ -155,6 +158,13 @@ public class CircularHoughTransform {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void printThis() 
+	{
+		System.out.println("Number Of Bins => Radius Bins ::" + numberOfRadiusBins + " CenterX Bins ::" + numberOfCenterXBins +" CenterY Bins ::" + numberOfCenterYBins);
+		System.out.println(" Range => Radius  :: Min = " + radiusRange[0] + " Max =" +radiusRange[1] +" CenterX :: Min =" + centerXRange[0] + " Max = " + centerXRange[1] + "CenterY :: Min =" + centerYRange[0] + " Max = " + centerYRange[1] );
+		System.out.println("Bin Sizes => Radius :: " + radiusBinSize + "  CenterX  :: " + centerXBinSize + "  CenterY  :: " + centerYBinSize);
 	}
 
 }

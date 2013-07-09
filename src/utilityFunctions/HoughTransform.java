@@ -1,3 +1,4 @@
+package utilityFunctions;
 import java.awt.Point;
 import java.util.Vector;
 
@@ -56,7 +57,8 @@ public class HoughTransform {
 			rhoVal  = (point.x * Math.cos(theta)) + (point.y * Math.sin(theta));
 
 			if(rhoVal <0)
-				continue;
+			rhoVal = -rhoVal;
+				//	continue;
 
 			rhoIndex = (int) Math.round((rhoVal-rhoRange[0])/rhoBinSize);
 			if (rhoIndex>=0 && rhoIndex < numberOfRhoBins  ) 

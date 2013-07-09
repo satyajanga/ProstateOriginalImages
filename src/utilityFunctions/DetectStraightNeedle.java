@@ -1,3 +1,4 @@
+package utilityFunctions;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -115,7 +116,7 @@ public class DetectStraightNeedle {
 		for(int i=boundsOfRegion[0];i<boundsOfRegion[1];i++)
 			for(int j=boundsOfRegion[2];j<boundsOfRegion[3];j++)
 			{
-				b= img.getPixel(i, j)[0];//.get(i*height + j);
+				//b= img.getPixel(i, j)[0];//.get(i*height + j);
 				b= img.getProcessor().get(i,j);
 				if((b&0xFF) == 0)
 				{
